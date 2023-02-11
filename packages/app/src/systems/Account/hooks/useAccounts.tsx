@@ -30,7 +30,6 @@ const selectors = {
       return AccountStatus.unlockingLoading;
     }
     if (state.hasTag('loading')) return AccountStatus.loading;
-    if (state.matches('unlocking')) return AccountStatus.unlocking;
     return AccountStatus.idle;
   },
   context(state: AccountsMachineState) {
@@ -56,24 +55,8 @@ export function useAccounts() {
   const account = store.useSelector(Services.accounts, selectors.account);
   const overlay = useOverlay();
 
-  function unlock(password: string) {
-    store.send(Services.accounts, {
-      type: 'UNLOCK_VAULT',
-      input: { password },
-    });
-  }
-
-  function closeUnlock() {
-    store.send(Services.accounts, {
-      type: 'CLOSE_UNLOCK',
-    });
-  }
-
   function closeDialog() {
     overlay.close();
-    if (status('unlocking')) {
-      closeUnlock();
-    }
   }
 
   function status(status: keyof typeof AccountStatus) {
@@ -106,8 +89,6 @@ export function useAccounts() {
     hasBalance,
     isLoading: status('loading'),
     handlers: {
-      unlock,
-      closeUnlock,
       closeDialog,
       addAccount: store.addAccount,
       goToAdd: store.openAccountsAdd,
