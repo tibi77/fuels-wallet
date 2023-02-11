@@ -48,7 +48,7 @@ export type AccountInputs = {
   addNewAccount: {
     data: {
       name: string;
-      manager: WalletManager;
+      vaultId: number;
     };
   };
   unlock: {
@@ -210,7 +210,7 @@ export class AccountService {
     }
 
     const account = await VaultService.addAccount({
-      vaultId: 0,
+      vaultId: data.vaultId,
     });
     // Add new account to database
     const dbAccount = await this.addAccount({
