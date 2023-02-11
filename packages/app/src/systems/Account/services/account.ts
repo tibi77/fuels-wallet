@@ -9,12 +9,12 @@ import { unlockManager } from '../utils/manager';
 
 import { isEth } from '~/systems/Asset/utils/asset';
 import { ASSET_MAP } from '~/systems/Asset/utils/constants';
-import { CoreService } from '~/systems/Core';
+import { CoreService } from '~/systems/Core/services';
 import type { Maybe } from '~/systems/Core/types';
 import { db } from '~/systems/Core/utils/database';
 import { getPhraseFromValue } from '~/systems/Core/utils/string';
 import { NetworkService } from '~/systems/Network/services';
-import { VaultService } from '~/systems/Vault';
+import { VaultService } from '~/systems/Vault/services';
 
 export type AccountInputs = {
   addAccount: {
@@ -104,7 +104,7 @@ export class AccountService {
     });
 
     if (!account) {
-      throw new Error('Account not found!');
+      throw new Error(`Account not found! ${address}`);
     }
 
     return account;
@@ -209,15 +209,15 @@ export class AccountService {
       throw new Error('Account name already exists');
     }
 
-    const manager = data.manager;
-    const account = await manager.addAccount();
+    const account = await VaultService.addAccount({
+      vaultId: 0,
+    });
     // Add new account to database
     const dbAccount = await this.addAccount({
       data: {
         name: data.name,
         address: account.address.toString(),
         publicKey: account.publicKey,
-        vaultId: 0,
       },
     });
     return dbAccount;
