@@ -6,6 +6,7 @@ import { dappRoutes } from './systems/DApp/routes';
 import { sendRoutes } from './systems/Send';
 import { settingsRoutes } from './systems/Settings';
 import { transactionRoutes } from './systems/Transaction/routes';
+import { UnlockGuard } from './systems/Unlock';
 
 import { PrivateRoute, PublicRoute } from '~/systems/Core';
 import { Pages } from '~/systems/Core/types';
@@ -30,11 +31,13 @@ export const webAppRoutes = (
     <Route>
       <Route element={<PublicRoute />}>{signUpRoutes}</Route>
       <Route element={<PrivateRoute />}>
-        <Route
-          path={Pages.signUpWalletCreated()}
-          element={<WalletCreatedPage />}
-        />
-        {walletRoutes}
+        <Route element={<UnlockGuard />}>
+          <Route
+            path={Pages.signUpWalletCreated()}
+            element={<WalletCreatedPage />}
+          />
+          {walletRoutes}
+        </Route>
       </Route>
       <Route path="*" element={<Navigate to={Pages.wallet()} />} />
     </Route>
@@ -44,8 +47,10 @@ export const webAppRoutes = (
 export const crxPopupRoutes = (
   <Routes>
     <Route element={<CRXPrivateRoute />}>
-      {walletRoutes}
-      <Route path="*" element={<Navigate to={Pages.wallet()} />} />
+      <Route element={<UnlockGuard />}>
+        {walletRoutes}
+        <Route path="*" element={<Navigate to={Pages.wallet()} />} />
+      </Route>
     </Route>
   </Routes>
 );
