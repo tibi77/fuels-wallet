@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { CreatePassword, MnemonicRead, MnemonicWrite } from '../../components';
@@ -7,11 +8,12 @@ import { SignUpType } from '../../machines/signUpMachine';
 import { Layout, Pages } from '~/systems/Core';
 
 export function CreateWallet() {
+  const { t } = useTranslation();
   const { state, handlers, context } = useSignUp(SignUpType.create);
   const navigate = useNavigate();
 
   return (
-    <Layout title="Create Wallet" isPublic>
+    <Layout title={t('singup.create.head.title')} isPublic>
       {state.matches('showingMnemonic') && (
         <MnemonicRead
           words={context.data?.mnemonic}
