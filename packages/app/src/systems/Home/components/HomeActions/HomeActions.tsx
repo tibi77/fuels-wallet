@@ -1,5 +1,5 @@
 import { cssObj } from '@fuel-ui/css';
-import { Button, Flex, Link, Text, Tooltip } from '@fuel-ui/react';
+import { Box, Button, Flex, Link, Text, Tooltip } from '@fuel-ui/react';
 
 import { useNodeInfo } from '../../hooks';
 
@@ -22,7 +22,8 @@ export const HomeActions = ({
   const { versionCompatible, isLoading: isLoadingNodeInfo } = useNodeInfo(
     selectedNetwork?.url
   );
-  const shouldDisableSend = isDisabled || !hasBalance || isLoadingNodeInfo;
+  const shouldDisableSend =
+    isDisabled || !hasBalance || isLoadingNodeInfo || !versionCompatible;
 
   const sendButton = (
     <Button
@@ -37,7 +38,7 @@ export const HomeActions = ({
   );
 
   return (
-    <>
+    <Box css={styles.root}>
       <Flex css={styles.wrapper}>
         {hasBalance ? (
           sendButton
@@ -67,19 +68,21 @@ export const HomeActions = ({
           </Link>
         </Text>
       )}
-    </>
+    </Box>
   );
 };
 
 const styles = {
+  root: cssObj({
+    marginBottom: '$6',
+  }),
   version: cssObj({
+    marginTop: '$2',
     padding: '$0 $8',
     textAlign: 'center',
-    marginBottom: '$6',
   }),
   wrapper: cssObj({
     marginTop: '$8',
-    marginBottom: '$2',
     flexShrink: 0,
     gap: '$2',
   }),
