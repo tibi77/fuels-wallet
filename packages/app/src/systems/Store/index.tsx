@@ -24,7 +24,7 @@ export * from './types';
 
 export const store$ = createStore<StoreMachines>({
   id: 'fuelStore',
-  persistedStates: ['networks'],
+  persistedStates: [],
 });
 
 export const store = store$
