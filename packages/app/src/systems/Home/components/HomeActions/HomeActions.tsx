@@ -1,7 +1,8 @@
 import { cssObj } from '@fuel-ui/css';
-import { Box, Button, Flex, Link, Text, Tooltip } from '@fuel-ui/react';
+import { Box, Button, Flex, Tooltip } from '@fuel-ui/react';
 
 import { useNodeInfo } from '../../hooks';
+import { NetworkWarning } from '../NetworkWarning/NetworkWarning';
 
 import { useAccounts } from '~/systems/Account';
 import { useNetworks } from '~/systems/Network';
@@ -57,17 +58,7 @@ export const HomeActions = ({
           Receive
         </Button>
       </Flex>
-      {!versionCompatible && (
-        <Text fontSize="xs" css={styles.version}>
-          The selected network is not compatible with Fuel Wallet {'>'} v0.7.0.{' '}
-          <Link
-            isExternal
-            href="https://github.com/FuelLabs/fuels-wallet/releases/tag/v0.1.0"
-          >
-            Previous version
-          </Link>
-        </Text>
-      )}
+      <NetworkWarning hidden={versionCompatible} />
     </Box>
   );
 };
@@ -75,11 +66,6 @@ export const HomeActions = ({
 const styles = {
   root: cssObj({
     marginBottom: '$6',
-  }),
-  version: cssObj({
-    marginTop: '$2',
-    padding: '$0 $8',
-    textAlign: 'center',
   }),
   wrapper: cssObj({
     marginTop: '$8',
