@@ -1,5 +1,23 @@
 # fuels-wallet
 
+## 0.8.0
+
+### Minor Changes
+
+- [#641](https://github.com/FuelLabs/fuels-wallet/pull/641) [`0c65d22`](https://github.com/FuelLabs/fuels-wallet/commit/0c65d22bab404a5bffb399b5ea4dabe6b1f91022) Thanks [@eswarasai](https://github.com/eswarasai)! - Add account name on home and tx preview
+
+### Patch Changes
+
+- [#692](https://github.com/FuelLabs/fuels-wallet/pull/692) [`cb9340c`](https://github.com/FuelLabs/fuels-wallet/commit/cb9340cfa919647d47362aa6eda69764db7b65bd) Thanks [@LuizAsFight](https://github.com/LuizAsFight)! - feat(infra): improve dev linking with local deps (fuel-ui and fuel-ts)
+
+- [#678](https://github.com/FuelLabs/fuels-wallet/pull/678) [`dbda3f6`](https://github.com/FuelLabs/fuels-wallet/commit/dbda3f64295f70fdedd3ad4a6a1f53076d3205e0) Thanks [@luizstacio](https://github.com/luizstacio)! - Fix typo
+
+- [#697](https://github.com/FuelLabs/fuels-wallet/pull/697) [`6953201`](https://github.com/FuelLabs/fuels-wallet/commit/6953201d0ae1fb2f506ea33707641ee6950d8097) Thanks [@LuizAsFight](https://github.com/LuizAsFight)! - fix: vite config
+
+- Updated dependencies []:
+  - @fuel-wallet/sdk@0.8.0
+  - @fuel-wallet/types@0.8.0
+
 ## 0.7.2
 
 ### Patch Changes
